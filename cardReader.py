@@ -137,10 +137,13 @@ class CardReader():
         print ("\nATTEMPTING TO CONNECT TO MSR605")
         
         #this looks for the first available COM port, can be changed to look for the MSR
+        c = ['/dev/ttyUSB0', '/dev/ttyUSB1']
         for x in range(0, 255):
+            c.append('COM' + str(x))
+        for x in c:
             try:
-
-                self.__serialConn = serial.Serial('COM' + str(x))  # opens the serial port
+                self.__serialConn = serial.Serial(x)  # opens the serial port
+                print("Worked: "+x)
             except(serial.SerialException, OSError):
                 pass #continues going through the loop
             
